@@ -93,6 +93,10 @@ spec:
             - name: VAULT_CACERT
               value: /etc/vault/certs/ca.crt
           {{- end }}
+          {{- if .Values.operator.disableHttp2 }}
+            - name: GODEBUG
+              value: http2client=0
+          {{- end }}
           ports:
           {{- if .Values.webhook.enabled }}
             - containerPort: 443
